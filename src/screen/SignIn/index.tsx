@@ -12,7 +12,7 @@ const SignIn = ({navigation} : SignInProps) => {
   )
   const onSigInPress = useCallback(
     () => {
-     navigation.navigate("HomeScreen")
+     navigation.navigate("MainApp")
     },
     [],
   )

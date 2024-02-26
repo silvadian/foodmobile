@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { ICArrowLeft } from '../assets'
 import { useNavigation } from '@react-navigation/native'
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 112,
-    gap : 16
+    gap : 16,
+    marginTop : Platform.OS === "ios" ? 32 : 0
   },
   body: {
     flex: 1,
