@@ -24,4 +24,4 @@ const MenuItem = ({title, active, onPress}: MenuItem) => {
   );
 };
 
-export default MenuItem;
+export default MenuItem; 
