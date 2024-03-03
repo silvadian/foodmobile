@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Gap} from '.';
 import {ICStar} from '../assets';
 
@@ -8,6 +15,7 @@ interface FoodCardPotraitProps {
   title: string;
   star: number;
   variant: 'potrait';
+  onPress?: () => void;
 }
 
 interface FoodCardLandscapeProps {
@@ -16,12 +24,17 @@ interface FoodCardLandscapeProps {
   star: number;
   variant: 'landscape';
   price: number;
+  type?: 'PastOrder' | 'InProgress';
+  isCancel?: boolean;
+  onPress?: () => void;
 }
 
 const FoodCard = (props: FoodCardLandscapeProps | FoodCardPotraitProps) => {
   if (props.variant === 'landscape')
     return (
-      <View style={styles.landscapeContainer}>
+      <TouchableOpacity
+        style={styles.landscapeContainer}
+        onPress={props.onPress}>
         <Image
           source={props.image}
           style={styles.landscapeImage}
@@ -32,19 +45,29 @@ const FoodCard = (props: FoodCardLandscapeProps | FoodCardPotraitProps) => {
           <Gap height={4} />
           <Text style={styles.price}>{props.price}</Text>
         </View>
-        <View style={styles.starWrapper}>
-          {[1, 2, 3, 4, 5].map(item => (
-            <ICStar
-              fill={props.star >= item ? '#FFC700' : '#ECECEC'}
-              key={item}
-            />
-          ))}
-        </View>
-      </View>
+        {props.type === 'PastOrder' ? (
+          <View>
+            <Text style={styles.date}>Jun 12, 14:00</Text>
+            <Gap height={2} />
+            <Text style={styles.cancel}>
+              {props.isCancel ? 'Cancelled' : ''}
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.starWrapper}>
+            {[1, 2, 3, 4, 5].map(item => (
+              <ICStar
+                fill={props.star >= item ? '#FFC700' : '#ECECEC'}
+                key={item}
+              />
+            ))}
+          </View>
+        )}
+      </TouchableOpacity>
     );
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={props.onPress}>
       <Image source={props.image} style={styles.image} resizeMode="cover" />
       <Gap height={12} />
       <Text style={styles.title}>{props.title}</Text>
@@ -57,7 +80,7 @@ const FoodCard = (props: FoodCardLandscapeProps | FoodCardPotraitProps) => {
           />
         ))}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -88,9 +111,9 @@ const styles = StyleSheet.create({
   },
   landscapeContainer: {
     flexDirection: 'row',
-    paddingHorizontal : 24,
-    alignItems : "center",
-    marginVertical : 8
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    marginVertical: 8,
   },
   price: {
     color: '#8D92A3',
@@ -99,6 +122,15 @@ const styles = StyleSheet.create({
   landscapeImage: {
     width: 60,
     height: 60,
-    borderRadius : 8
+    borderRadius: 8,
+  },
+  date: {
+    fontSize: 10,
+    fontWeight: '400',
+  },
+  cancel: {
+    fontSize: 10,
+    fontWeight: '400',
+    color: '#D9435E',
   },
 });

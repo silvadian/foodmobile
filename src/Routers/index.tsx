@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
+  FoodDetails,
   HomeScreen,
   OrderScreen,
   ProfileScreen,
@@ -23,9 +24,21 @@ const MainApp = () => {
       initialRouteName="HomeScreen"
       screenOptions={{headerShown: false}}
       tabBar={props => <Menu {...props} />}>
-      <Tab.Screen name="HomeScreen" component={HomeScreen} options={{title : "Home"}} />
-      <Tab.Screen name="OrderScreen" component={OrderScreen} options={{title : "Order"}} />
-      <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{title : "Profile"}} />
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{title: 'Home'}}
+      />
+      <Tab.Screen
+        name="OrderScreen"
+        component={OrderScreen}
+        options={{title: 'Order'}}
+      />
+      <Tab.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{title: 'Profile'}}
+      />
     </Tab.Navigator>
   );
 };
@@ -41,6 +54,7 @@ const Routers = () => {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="SignUpAddress" component={SignUpAddress} />
+        <Stack.Screen name="FoodDetails" component={FoodDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );

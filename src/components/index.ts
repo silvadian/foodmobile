@@ -6,6 +6,16 @@ import Header from './Header';
 import InputAvatar from './InputAvatar';
 import FoodCard from './FoodCard';
 import HomeHeader from './HomeHeader';
+import Bar from './Bar';
 
-
-export {Input, Container, Gap, Button, Header, InputAvatar, FoodCard, HomeHeader};
+export {
+  Input,
+  Container,
+  Gap,
+  Button,
+  Header,
+  InputAvatar,
+  FoodCard,
+  HomeHeader,
+  Bar,
+};
