@@ -6,7 +6,6 @@ import MenuItem from './MenuItem';
 interface MenuProps extends BottomTabBarProps {}
 
 const Menu = ({state, descriptors, navigation}: MenuProps) => {
-  console.log({state: state.routes});
   return (
     <View style={styles.container}>
       {state.routes.map((route, index) => {

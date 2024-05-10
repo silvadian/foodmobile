@@ -6,6 +6,7 @@ import {
   FoodDetails,
   HomeScreen,
   OrderScreen,
+  PaymentAddress,
   ProfileScreen,
   SignIn,
   SignUp,
@@ -55,6 +56,7 @@ const Routers = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="SignUpAddress" component={SignUpAddress} />
         <Stack.Screen name="FoodDetails" component={FoodDetails} />
+        <Stack.Screen name="PaymentAddress" component={PaymentAddress} />
       </Stack.Navigator>
     </NavigationContainer>
   );

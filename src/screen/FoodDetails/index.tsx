@@ -61,7 +61,7 @@ const FoodDetails = ({navigation}: FoodDetailsProps) => {
             <Text style={styles.price}>IDR 12.289.000</Text>
           </View>
           <View style={styles.footerItem}>
-            <Button label="Order Now" />
+            <Button label="Order Now" onPress={() => navigation.navigate("PaymentAddress")} />
           </View>
         </View>
         <Gap height={24}/>

@@ -6,6 +6,7 @@ import SignUpAddress from './SignUpAddress';
 import OrderScreen from './OrderScreen';
 import ProfileScreen from './ProfileScreen';
 import FoodDetails from './FoodDetails';
+import PaymentAddress from './PaymentAddress';
 
 export {
   HomeScreen,
@@ -16,4 +17,5 @@ export {
   OrderScreen,
   ProfileScreen,
   FoodDetails,
+  PaymentAddress,
 };
