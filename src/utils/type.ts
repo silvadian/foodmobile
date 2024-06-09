@@ -5,6 +5,8 @@ export type RootStackParams = {
   SignIn: undefined;
   SignUp: undefined;
   MainApp: undefined;
+  AdminDashboard: undefined;
+  AddProductScreen: undefined;
   SplashScreen: undefined;
   SignUpAddress: undefined;
   FoodDetails: {id: number};
@@ -14,6 +16,10 @@ export type RootStackParams = {
 export type StackNavigation = NavigationProp<RootStackParams>;
 
 export type MainAppProps = NativeStackScreenProps<RootStackParams, 'MainApp'>;
+export type AdminDashboardProps = NativeStackScreenProps<
+  RootStackParams,
+  'AdminDashboard'
+>;
 
 export type SplashScreenProps = NativeStackScreenProps<
   RootStackParams,

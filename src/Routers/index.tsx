@@ -3,15 +3,18 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
+  AddProductScreen,
   FoodDetails,
   HomeScreen,
   OrderScreen,
   PaymentAddress,
+  ProductScreen,
   ProfileScreen,
   SignIn,
   SignUp,
   SignUpAddress,
   SplashScreen,
+  TransactionScreen,
 } from '../screen';
 import {RootStackParams} from '../utils';
 import Menu from './Menu';
@@ -44,6 +47,31 @@ const MainApp = () => {
   );
 };
 
+const AdminDashboard = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName="HomeAdminScreen"
+      screenOptions={{headerShown: false}}
+      tabBar={props => <Menu {...props} />}>
+      <Tab.Screen
+        name="ProductScreen"
+        component={ProductScreen}
+        options={{title: 'Home'}}
+      />
+      <Tab.Screen
+        name="TransactionScreen"
+        component={TransactionScreen}
+        options={{title: 'Order'}}
+      />
+      <Tab.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{title: 'Profile'}}
+      />
+    </Tab.Navigator>
+  );
+};
+
 const Routers = () => {
   return (
     <NavigationContainer>
@@ -51,6 +79,8 @@ const Routers = () => {
         initialRouteName="SplashScreen"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="MainApp" component={MainApp} />
+        <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
+        <Stack.Screen name="AddProductScreen" component={AddProductScreen}/>
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SplashScreen" component={SplashScreen} />

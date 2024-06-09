@@ -2,10 +2,12 @@ import React from 'react';
 import {
   Image,
   ImageSourcePropType,
+  StyleProp,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  ViewStyle,
 } from 'react-native';
 import {Gap} from '.';
 import {ICStar} from '../assets';
@@ -16,6 +18,7 @@ interface FoodCardPotraitProps {
   star: number;
   variant: 'potrait';
   onPress?: () => void;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 interface FoodCardLandscapeProps {
@@ -67,7 +70,9 @@ const FoodCard = (props: FoodCardLandscapeProps | FoodCardPotraitProps) => {
     );
 
   return (
-    <TouchableOpacity style={styles.container} onPress={props.onPress}>
+    <TouchableOpacity
+      style={[styles.container, props.containerStyle]}
+      onPress={props.onPress}>
       <Image source={props.image} style={styles.image} resizeMode="cover" />
       <Gap height={12} />
       <Text style={styles.title}>{props.title}</Text>
@@ -88,14 +93,14 @@ export default FoodCard;
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
+    // width: 200,
     height: 210,
     borderRadius: 8,
     backgroundColor: '#3F3F3F',
     marginHorizontal: 12,
   },
   image: {
-    width: 200,
+    width: '100%',
     height: 140,
   },
   title: {

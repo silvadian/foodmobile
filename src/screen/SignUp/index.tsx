@@ -1,3 +1,4 @@
+import React, {useCallback, useState} from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -5,7 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback, useState} from 'react';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {ICCamera, ICGallery, ICX} from '../../assets';
 import {
   Button,
   Container,
@@ -14,17 +16,32 @@ import {
   Input,
   InputAvatar,
 } from '../../components';
-import {SignInProps, SignUpProps} from '../../utils';
-import {ICCamera, ICGallery, ICX} from '../../assets';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {SignUpProps} from '../../utils';
+import {useRegisterMutation} from '../../redux';
 
 const SignUp = ({navigation}: SignUpProps) => {
+  const [mutation] = useRegisterMutation();
+
   const [showPicker, setShowPicker] = useState(false);
   const [uri, setUri] = useState<string>();
   const [base64, setBase64] = useState<string>();
+
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const GotoAddress = useCallback(() => {
-    navigation.navigate('SignUpAddress');
-  }, []);
+    mutation({full_name: fullName, avatar: base64, email, password})
+      .unwrap()
+      .then(res => {
+        console.log('res', res);
+        navigation.navigate('SignUpAddress');
+      })
+      .catch((err: any) => {
+        console.log("ini lagi error", err);
+      });
+  }, [fullName, email, password, base64]);
+
   const handleOpenCamera = useCallback(async () => {
     try {
       const result = await launchCamera({
@@ -69,11 +86,27 @@ const SignUp = ({navigation}: SignUpProps) => {
         <InputAvatar
           onPress={() => setShowPicker(true)}
           uri={uri}></InputAvatar>
-        <Input label="Full Name" placeholder="Type your full name" />
+        <Input
+          value={fullName}
+          onChangeText={val => setFullName(val)}
+          label="Full Name"
+          placeholder="Type your full name"
+        />
         <Gap height={16} />
-        <Input label="Email Address" placeholder="Type your email address" />
+        <Input
+          value={email}
+          onChangeText={val => setEmail(val)}
+          label="Email Address"
+          placeholder="Type your email address"
+        />
         <Gap height={16} />
-        <Input label="Password" placeholder="Type your password" />
+        <Input
+          value={password}
+          onChangeText={val => setPassword(val)}
+          secureTextEntry
+          label="Password"
+          placeholder="Type your password"
+        />
         <Gap height={24} />
         <Button label="Continue" onPress={GotoAddress} />
       </View>

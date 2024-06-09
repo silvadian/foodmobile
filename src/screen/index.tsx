@@ -7,6 +7,9 @@ import OrderScreen from './OrderScreen';
 import ProfileScreen from './ProfileScreen';
 import FoodDetails from './FoodDetails';
 import PaymentAddress from './PaymentAddress';
+import TransactionScreen from './TransactionScreen';
+import ProductScreen from './ProductScreen';
+import AddProductScreen from './AddProductScreen';
 
 export {
   HomeScreen,
@@ -18,4 +21,7 @@ export {
   ProfileScreen,
   FoodDetails,
   PaymentAddress,
+  TransactionScreen,
+  ProductScreen,
+  AddProductScreen
 };
