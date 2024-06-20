@@ -8,7 +8,7 @@ export type RootStackParams = {
   AdminDashboard: undefined;
   AddProductScreen: undefined;
   SplashScreen: undefined;
-  SignUpAddress: undefined;
+  SignUpAddress: {id: number};
   FoodDetails: {id: number};
   PaymentAddress: undefined;
 };

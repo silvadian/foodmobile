@@ -31,14 +31,15 @@ const SignUp = ({navigation}: SignUpProps) => {
   const [password, setPassword] = useState('');
 
   const GotoAddress = useCallback(() => {
-    mutation({full_name: fullName, avatar: base64, email, password})
+    mutation({full_name: fullName, image: base64, email, password})
       .unwrap()
       .then(res => {
-        console.log('res', res);
-        navigation.navigate('SignUpAddress');
+        console.log('res', res.data.id);
+        const {id} = res.data;
+        navigation.navigate('SignUpAddress', {id});
       })
       .catch((err: any) => {
-        console.log("ini lagi error", err);
+        console.log('ini lagi error', err);
       });
   }, [fullName, email, password, base64]);
 
