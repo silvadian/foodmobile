@@ -46,3 +46,25 @@ export interface getUserResponse extends SuccessResponse {
     rules: 'user' | 'admin';
   };
 }
+
+export interface Food {
+  id: number;
+  title: string;
+  description: string;
+  ingredients: string;
+  picture: string;
+  popular: number;
+  price: number;
+  recommended: number;
+  star: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface getFoodsResponse extends SuccessResponse {
+  data: Food[];
+}
+
+export interface getFoodResponse extends SuccessResponse {
+  data: Food;
+}

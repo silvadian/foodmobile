@@ -15,6 +15,7 @@ import {
   Header,
   Input,
   InputAvatar,
+  ShowPicker,
 } from '../../components';
 import {SignUpProps} from '../../utils';
 import {useRegisterMutation} from '../../redux';
@@ -112,23 +113,11 @@ const SignUp = ({navigation}: SignUpProps) => {
         <Button label="Continue" onPress={GotoAddress} />
       </View>
       {showPicker ? (
-        <View style={styles.openPicker}>
-          <View style={styles.pickerItem}>
-            <TouchableOpacity onPress={handleOpenCamera}>
-              <ICCamera width={48} height={48} fill="#8D92A3" />
-              <Text style={styles.pickerText}>Camera</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleOpenGallery}>
-              <ICGallery width={48} height={48} fill="#8D92A3" />
-              <Text style={styles.pickerText}>Gallery</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            style={{alignItems: 'flex-end'}}
-            onPress={() => setShowPicker(false)}>
-            <ICX />
-          </TouchableOpacity>
-        </View>
+        <ShowPicker
+          handleOpenCamera={handleOpenCamera}
+          handleOpenGallery={handleOpenGallery}
+          setShowPicker={() => setShowPicker(prev => !prev)}
+        />
       ) : null}
     </Container>
   );
@@ -140,26 +129,5 @@ const styles = StyleSheet.create({
   container: {},
   form: {
     paddingHorizontal: 24,
-  },
-  openPicker: {
-    position: 'absolute',
-    bottom: 32,
-    left: 16,
-    right: 16,
-    maxWidth: Dimensions.get('window').width,
-    backgroundColor: '#E2E2E2',
-    padding: 16,
-    borderRadius: 12,
-  },
-  pickerItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-  },
-  pickerText: {
-    fontWeight: '600',
-    fontSize: 14,
-    textAlign: 'center',
-    color: '#8D92A3',
   },
 });

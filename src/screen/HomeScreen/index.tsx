@@ -1,13 +1,17 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {dummyImage1} from '../../assets';
-import {FoodCard, HomeHeader} from '../../components';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { FoodCard, HomeHeader } from '../../components';
+import { useGetFoodsQuery } from '../../redux';
+import { config } from '../../redux/api/config';
+import { StackNavigation } from '../../utils';
 import HomeTab from './HomeTab';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigation} from '../../utils';
 
 const HomeScreen = () => {
   const navigation = useNavigation<StackNavigation>();
+  const {data} = useGetFoodsQuery(undefined);
+  console.log('data', data);
+
   return (
     <View style={{flex: 1, backgroundColor: '#4F4F4F'}}>
       <HomeHeader />
@@ -16,16 +20,22 @@ const HomeScreen = () => {
           horizontal
           style={{minHeight: 256, paddingTop: 24}}
           showsHorizontalScrollIndicator={false}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(item => (
-            <FoodCard
-              key={item}
-              variant="potrait"
-              star={4}
-              title="Cherry Healthy"
-              image={dummyImage1}
-              onPress={() => navigation.navigate('FoodDetails', {id: item})}
-            />
-          ))}
+          {data?.data?.length && data?.data?.length > 0
+            ? data.data.map(item => (
+                <FoodCard
+                  key={item.id}
+                  title={item.title}
+                  star={item.star}
+                  image={{
+                    uri: `${config.serviceMediaUrl}/images/${item.picture}`,
+                  }}
+                  variant="potrait"
+                  onPress={() =>
+                    navigation.navigate('FoodDetails', {id: item.id})
+                  }
+                />
+              ))
+            : null}
         </ScrollView>
       </View>
 

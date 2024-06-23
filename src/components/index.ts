@@ -7,6 +7,7 @@ import InputAvatar from './InputAvatar';
 import FoodCard from './FoodCard';
 import HomeHeader from './HomeHeader';
 import Bar from './Bar';
+import ShowPicker from './ShowPicker';
 
 export {
   Input,
@@ -18,4 +19,5 @@ export {
   FoodCard,
   HomeHeader,
   Bar,
+  ShowPicker,
 };

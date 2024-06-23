@@ -1,15 +1,19 @@
 import {combineReducers} from 'redux';
-import {userApi} from './api/userApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistReducer, persistStore} from 'redux-persist';
 import {configureStore} from '@reduxjs/toolkit';
 
+import {userApi} from './api/userApi';
+import {foodApi} from './api/foodApi';
+
 import userReducer from './reducer/user';
+
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 const rootreducer = combineReducers({
   user: userReducer,
   [userApi.reducerPath]: userApi.reducer,
+  [foodApi.reducerPath]: foodApi.reducer,
 });
 
 const persistConfig = {
@@ -24,6 +28,7 @@ const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({serializableCheck: false}).concat([
       userApi.middleware,
+      foodApi.middleware,
     ]),
 });
 
@@ -37,3 +42,4 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export * from './api/userApi';
+export * from './api/foodApi'

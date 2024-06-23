@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   AddProductScreen,
+  AdminFoodDetails,
   FoodDetails,
   HomeScreen,
   OrderScreen,
@@ -87,6 +88,8 @@ const Routers = () => {
         <Stack.Screen name="SignUpAddress" component={SignUpAddress} />
         <Stack.Screen name="FoodDetails" component={FoodDetails} />
         <Stack.Screen name="PaymentAddress" component={PaymentAddress} />
+        <Stack.Screen name="AdminFoodDetails" component={AdminFoodDetails} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

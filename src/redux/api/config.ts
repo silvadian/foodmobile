@@ -1,3 +1,4 @@
 export const config = {
-  url: 'https://acd9-36-81-18-214.ngrok-free.app',
+  url: 'https://a7b3-36-81-68-20.ngrok-free.app',
+  serviceMediaUrl: 'https://kdwvs4qd-4002.asse.devtunnels.ms',
 };

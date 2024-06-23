@@ -1,12 +1,16 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {Button, Container, FoodCard, Gap, Header} from '../../components';
-import {dummyImage1} from '../../assets';
-import {StackNavigation} from '../../utils';
-import {useNavigation} from '@react-navigation/native';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Button, Container, FoodCard, Gap, Header } from '../../components';
+import { useGetFoodsQuery } from '../../redux';
+import { config } from '../../redux/api/config';
+import { StackNavigation } from '../../utils';
 
 const ProductScreen = () => {
   const navigation = useNavigation<StackNavigation>();
+  const {data, isLoading, isError, isSuccess, error} =
+    useGetFoodsQuery(undefined);
+
   return (
     <Container>
       <Header title="Product" noBack desc="Your product" />
@@ -17,17 +21,21 @@ const ProductScreen = () => {
             flexDirection: 'row',
             flexWrap: 'wrap',
           }}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(item => (
-            <FoodCard
-              key={item}
-              variant="potrait"
-              star={4}
-              title="Cherry Healthy"
-              image={dummyImage1}
-              containerStyle={{width: '44%', marginVertical: 12}}
-              onPress={() => navigation.navigate('FoodDetails', {id: item})}
-            />
-          ))}
+          {data?.data?.length && data?.data?.length > 0
+            ? data.data.map(item => (
+                <FoodCard
+                  key={item.id}
+                  title={item.title}
+                  star={item.star}
+                  image={{uri: `${config.serviceMediaUrl}/images/${item.picture}`}}
+                  containerStyle={{width: '44%', marginVertical: 12}}
+                  variant="potrait"
+                  onPress={() =>
+                    navigation.navigate('AdminFoodDetails', {id: item.id})
+                  }
+                />
+              ))
+            : null}
         </View>
       </ScrollView>
       <Gap height={12} />

@@ -11,6 +11,7 @@ export type RootStackParams = {
   SignUpAddress: {id: number};
   FoodDetails: {id: number};
   PaymentAddress: undefined;
+  AdminFoodDetails: {id: number};
 };
 
 export type StackNavigation = NavigationProp<RootStackParams>;
@@ -43,4 +44,14 @@ export type FoodDetailsProps = NativeStackScreenProps<
 export type PaymentAddressProps = NativeStackScreenProps<
   RootStackParams,
   'PaymentAddress'
+>;
+
+export type AdminFoodDetailsProps = NativeStackScreenProps<
+  RootStackParams,
+  'AdminFoodDetails'
+>;
+
+export type AddProductScreenProps = NativeStackScreenProps<
+  RootStackParams,
+  'AddProductScreen'
 >;

@@ -46,6 +46,7 @@ const SignIn = ({navigation}: SignInProps) => {
           onChangeText={val => setPassword(val)}
           label="Password"
           placeholder="Type your password"
+          secureTextEntry
         />
         <Gap height={24} />
         <Button label="SignIn" onPress={onSigInPress} />

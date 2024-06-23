@@ -1,62 +1,32 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {FoodCard} from '../../components';
-import {dummyImage1} from '../../assets';
+import {useGetFoodsQuery} from '../../redux';
+import {config} from '../../redux/api/config';
 
 const NewTaste = () => {
+  const {data} = useGetFoodsQuery(undefined);
   return (
     <View style={{backgroundColor: '#3F3F3F'}}>
       <ScrollView>
-        <FoodCard
-          variant="landscape"
-          star={1}
-          title="Burger Tamayo"
-          image={dummyImage1}
-          price={2000000}
-        />
-        <FoodCard
-          variant="landscape"
-          star={1}
-          title="Burger Tamayo"
-          image={dummyImage1}
-          price={2000000}
-        />
-        <FoodCard
-          variant="landscape"
-          star={1}
-          title="Burger Tamayo"
-          image={dummyImage1}
-          price={2000000}
-        />
-        <FoodCard
-          variant="landscape"
-          star={1}
-          title="Burger Tamayo"
-          image={dummyImage1}
-          price={2000000}
-        />
-        <FoodCard
-          variant="landscape"
-          star={1}
-          title="Burger Tamayo"
-          image={dummyImage1}
-          price={2000000}
-        />
-
-        <FoodCard
-          variant="landscape"
-          star={1}
-          title="Burger Tamayo"
-          image={dummyImage1}
-          price={2000000}
-        />
-        <FoodCard
-          variant="landscape"
-          star={1}
-          title="Burger Tamayo"
-          image={dummyImage1}
-          price={2000000}
-        />
+        {data?.data?.length && data?.data?.length > 0
+          ? data.data.map(item => (
+              <FoodCard
+                key={item.id}
+                variant="landscape"
+                star={item.star}
+                title={item.title}
+                image={{
+                  uri: `${config.serviceMediaUrl}/images/${item.picture}`,
+                }}
+                price={item.price}
+                onPress={
+                  () => {}
+                  // navigation.navigate('FoodDetails', {id: item.id})
+                }
+              />
+            ))
+          : null}
       </ScrollView>
     </View>
   );
