@@ -35,7 +35,6 @@ const SignUp = ({navigation}: SignUpProps) => {
     mutation({full_name: fullName, image: base64, email, password})
       .unwrap()
       .then(res => {
-        console.log('res', res.data.id);
         const {id} = res.data;
         navigation.navigate('SignUpAddress', {id});
       })

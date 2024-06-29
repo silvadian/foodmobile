@@ -1,5 +1,6 @@
-import {NavigationProp} from '@react-navigation/native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { NavigationProp } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Food } from './interface';
 
 export type RootStackParams = {
   SignIn: undefined;
@@ -10,7 +11,10 @@ export type RootStackParams = {
   SplashScreen: undefined;
   SignUpAddress: {id: number};
   FoodDetails: {id: number};
-  PaymentAddress: undefined;
+  PaymentAddress: {
+    food: Food;
+    amount: number
+  };
   AdminFoodDetails: {id: number};
 };
 

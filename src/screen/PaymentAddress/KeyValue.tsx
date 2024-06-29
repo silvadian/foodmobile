@@ -3,7 +3,7 @@ import React from 'react';
 
 interface KeyValueProps {
   title: string;
-  value: string;
+  value: string | number;
   isGreen?: boolean;
 }
 

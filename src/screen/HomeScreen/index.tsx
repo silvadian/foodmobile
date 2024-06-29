@@ -10,7 +10,7 @@ import HomeTab from './HomeTab';
 const HomeScreen = () => {
   const navigation = useNavigation<StackNavigation>();
   const {data} = useGetFoodsQuery(undefined);
-  console.log('data', data);
+
 
   return (
     <View style={{flex: 1, backgroundColor: '#4F4F4F'}}>

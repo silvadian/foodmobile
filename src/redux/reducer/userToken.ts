@@ -1,22 +1,22 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {userApi} from '../api/userApi';
 
-interface UserSlice {
+interface UserTokenSlice {
   userToken: {
     token?: string;
     refreshToken?: string;
   };
 }
 
-const initialState: UserSlice = {
+const initialState: UserTokenSlice = {
   userToken: {
     token: undefined,
     refreshToken: undefined,
   },
 };
 
-const userSlice = createSlice({
-  name: 'user',
+const userTokenSlice = createSlice({
+  name: 'userTokenSlice',
   initialState,
   reducers: {},
   extraReducers: builder => {
@@ -30,4 +30,4 @@ const userSlice = createSlice({
   },
 });
 
-export default userSlice.reducer;
+export default userTokenSlice.reducer;

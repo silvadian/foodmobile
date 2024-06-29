@@ -5,11 +5,11 @@ export const prepareHeaders = (
   headers: Headers,
   {getState}: Pick<BaseQueryApi, 'getState'>,
 ) => {
-  const {user} = getState() as RootState;
+  const {userToken} = getState() as RootState;
   headers.set('Access-Control-Allow-Origin', '*');
   headers.set('Accept', 'application/json');
-  if (user.userToken?.token) {
-    headers.set('Authorization', user.userToken.token);
+  if (userToken.userToken?.token) {
+    headers.set('Authorization', userToken.userToken.token);
   }
 
   return headers;

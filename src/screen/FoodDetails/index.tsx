@@ -1,73 +1,90 @@
+import React, {useCallback, useMemo, useState} from 'react';
 import {
-  StyleSheet,
-  Image,
-  View,
   Dimensions,
+  Image,
+  StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {ICArrowLeft, ICStar, dummyImage1} from '../../assets';
+import {ICArrowLeft, ICStar} from '../../assets';
 import {Button, Gap} from '../../components';
-import {FoodDetailsProps} from '../../utils';
+import {useGetFoodQuery} from '../../redux';
+import {config} from '../../redux/api/config';
+import {FoodDetailsProps, moneyFormat} from '../../utils';
 
 const {width} = Dimensions.get('screen');
 
-const FoodDetails = ({navigation}: FoodDetailsProps) => {
-  const [counter, setCounter] = useState(0);
+const FoodDetails = ({navigation, route}: FoodDetailsProps) => {
+  const [amount, setAmount] = useState(1);
+  const {id} = route.params;
+  const {data} = useGetFoodQuery(id);
+
+  const totalPrice = useMemo(() => {
+    const price = data?.data.price || 0;
+    return price * amount;
+  }, [data, amount]);
+
+  const handleCheckout = useCallback(() => {
+    if (data) navigation.navigate('PaymentAddress', {food: data.data, amount});
+  }, [data, amount]);
+
   return (
     <View style={styles.container}>
-      <Image source={dummyImage1} style={styles.image} />
+      <Image
+        source={{
+          uri: `${config.serviceMediaUrl}/images/${data?.data.picture}`,
+        }}
+        style={styles.image}
+      />
       <View style={styles.wrapper}>
         <View style={styles.headerWrap}>
           <View style={styles.titleWrap}>
-            <Text style={styles.title}>Cherry Healthy</Text>
+            <Text style={styles.title}>{data?.data.title}</Text>
             <Gap height={6} />
+
             <View style={styles.starWrap}>
-              <ICStar fill="#FFC700" />
-              <ICStar fill="#FFC700" />
-              <ICStar fill="#FFC700" />
-              <ICStar fill="#FFC700" />
-              <ICStar fill="#FFC700" />
+              {[1, 2, 3, 4, 5].map(item => (
+                <ICStar
+                  fill={(data?.data.star ?? 0) >= item ? '#FFC700' : '#ECECEC'}
+                  key={item}
+                />
+              ))}
             </View>
           </View>
           <View style={styles.counterWrap}>
             <TouchableOpacity
               style={styles.counterButton}
-              onPress={() => setCounter(prev => (prev > 0 ? prev - 1 : 0))}>
+              onPress={() => setAmount(prev => (prev > 1 ? prev - 1 : 1))}>
               <Text style={styles.textCounter}>-</Text>
             </TouchableOpacity>
-            <Text style={[styles.textCounter, {minWidth: 16}]}>{counter}</Text>
+            <Text style={[styles.textCounter, {minWidth: 16}]}>{amount}</Text>
             <TouchableOpacity
               style={styles.counterButton}
-              onPress={() => setCounter(prev => prev + 1)}>
+              onPress={() => setAmount(prev => prev + 1)}>
               <Text style={styles.textCounter}>+</Text>
             </TouchableOpacity>
           </View>
         </View>
         <Gap height={12} />
         <View style={styles.bodyWrap}>
-          <Text style={styles.descript}>
-            Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan
-            pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan
-            teratur.
-          </Text>
+          <Text style={styles.descript}>{data?.data.description}</Text>
           <Text style={styles.descriptTitle}>Ingredients</Text>
-          <Text style={styles.descript}>Seledri, telur, blueberry, madu.</Text>
+          <Text style={styles.descript}>{data?.data.ingredients}</Text>
         </View>
         <View style={styles.FooterWrap}>
           <View style={styles.footerItem}>
             <Text style={styles.priceLabel}>Total Price</Text>
-            <Text style={styles.price}>IDR 12.289.000</Text>
+            <Text style={styles.price}>{moneyFormat(totalPrice)}</Text>
           </View>
           <View style={styles.footerItem}>
-            <Button label="Order Now" onPress={() => navigation.navigate("PaymentAddress")} />
+            <Button label="Order Now" onPress={handleCheckout} />
           </View>
         </View>
-        <Gap height={24}/>
+        <Gap height={24} />
       </View>
       <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
-        <ICArrowLeft fill='#3F3F3F' />
+        <ICArrowLeft fill="#3F3F3F" />
       </TouchableOpacity>
     </View>
   );

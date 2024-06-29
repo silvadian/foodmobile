@@ -1,18 +1,25 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {dummyImage1} from '../../assets';
+import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
 import {Gap} from '../../components';
+import {moneyFormat} from '../../utils';
 
-const ProductCard = () => {
+interface ProductCardProps {
+  title: string;
+  price: number;
+  amount: number;
+  image: ImageSourcePropType;
+}
+
+const ProductCard = ({title, price, image, amount}: ProductCardProps) => {
   return (
     <View style={styles.wrapper}>
-      <Image source={dummyImage1} style={styles.image} />
+      <Image source={image} style={styles.image} />
       <Gap width={12} />
       <View style={{flex: 1}}>
-        <Text style={styles.title}>Cherry Healthy</Text>
-        <Text>IDR 12.289.000</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text>{moneyFormat(price)}</Text>
       </View>
-      <Text>14 item</Text>
+      <Text>{amount} item</Text>
     </View>
   );
 };

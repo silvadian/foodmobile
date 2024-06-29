@@ -37,16 +37,29 @@ export interface SignInResponse extends SuccessResponse {
   };
 }
 
-export interface getUserResponse extends SuccessResponse {
-  data: {
-    avatar: string;
-    email: string;
-    full_name: string;
-    id: number;
-    rules: 'user' | 'admin';
-  };
+export interface Address {
+  address: string;
+  city: string;
+  createdAt: Date;
+  house_number: string;
+  id: number;
+  phone: string;
+  updatedAt: Date;
+  user_id: number;
 }
 
+export interface UserData {
+  avatar: string;
+  email: string;
+  full_name: string;
+  id: number;
+  rules: 'user' | 'admin';
+  address: Address;
+}
+
+export interface getUserResponse extends SuccessResponse {
+  data: UserData;
+}
 export interface Food {
   id: number;
   title: string;
@@ -67,4 +80,12 @@ export interface getFoodsResponse extends SuccessResponse {
 
 export interface getFoodResponse extends SuccessResponse {
   data: Food;
+}
+
+export interface CreateOrderRequest {
+  food_id: number;
+  user_id: number;
+  amount: number;
+  status: 'Pending';
+  transaction_code: 'test';
 }

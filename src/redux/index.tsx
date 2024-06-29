@@ -5,15 +5,19 @@ import {configureStore} from '@reduxjs/toolkit';
 
 import {userApi} from './api/userApi';
 import {foodApi} from './api/foodApi';
+import {ordersApi} from './api/orderApi';
 
-import userReducer from './reducer/user';
+import userTokenReducer from './reducer/userToken';
+import userDataReducer from './reducer/userData';
 
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 const rootreducer = combineReducers({
-  user: userReducer,
+  userToken: userTokenReducer,
+  userData: userDataReducer,
   [userApi.reducerPath]: userApi.reducer,
   [foodApi.reducerPath]: foodApi.reducer,
+  [ordersApi.reducerPath]: ordersApi.reducer,
 });
 
 const persistConfig = {
@@ -29,6 +33,7 @@ const store = configureStore({
     getDefaultMiddleware({serializableCheck: false}).concat([
       userApi.middleware,
       foodApi.middleware,
+      ordersApi.middleware,
     ]),
 });
 
@@ -42,4 +47,5 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export * from './api/userApi';
-export * from './api/foodApi'
+export * from './api/foodApi';
+export * from './api/orderApi';

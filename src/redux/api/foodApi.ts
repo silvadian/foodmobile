@@ -13,7 +13,7 @@ export const foodApi = createApi({
   tagTypes: ['FOOD'],
   endpoints: builder => ({
     getFoods: builder.query<getFoodsResponse, string| undefined>({
-      query: params => `/foods${params}`,
+      query: params => `/foods${params ? params: ""}`,
       providesTags: [{type: 'FOOD', id: 'LIST'}],
     }),
     getFood: builder.query<getFoodResponse, number>({

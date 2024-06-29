@@ -21,6 +21,7 @@ const SignIn = ({navigation}: SignInProps) => {
         triger(undefined)
           .unwrap()
           .then(res => {
+            console.log('res', res)
             if (res.data.rules === 'user') navigation.navigate('MainApp');
             else navigation.navigate('AdminDashboard');
           })
