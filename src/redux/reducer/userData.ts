@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {userApi} from '../api/userApi';
 import {UserData} from '../../utils';
 
@@ -29,7 +29,11 @@ const initialState: UserDataSlice = {
 const userDataSlice = createSlice({
   name: 'userDataSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    clearUserData: state => {
+      state.userData = initialState.userData;
+    },
+  },
   extraReducers: builder => {
     builder.addMatcher(
       userApi.endpoints.getUser.matchFulfilled,
@@ -45,4 +49,5 @@ const userDataSlice = createSlice({
   },
 });
 
+export const {clearUserData} = userDataSlice.actions;
 export default userDataSlice.reducer;

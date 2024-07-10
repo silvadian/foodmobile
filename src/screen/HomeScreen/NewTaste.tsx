@@ -1,11 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {FoodCard} from '../../components';
-import {useGetFoodsQuery} from '../../redux';
-import {config} from '../../redux/api/config';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { FoodCard } from '../../components';
+import { useGetFoodsQuery } from '../../redux';
+import { config } from '../../redux/api/config';
 
 const NewTaste = () => {
   const {data} = useGetFoodsQuery(undefined);
+  const navigation = useNavigation<any>()
   return (
     <View style={{backgroundColor: '#3F3F3F'}}>
       <ScrollView>
@@ -21,8 +23,8 @@ const NewTaste = () => {
                 }}
                 price={item.price}
                 onPress={
-                  () => {}
-                  // navigation.navigate('FoodDetails', {id: item.id})
+                  () => 
+                  navigation.navigate('FoodDetails', {id: item.id})
                 }
               />
             ))

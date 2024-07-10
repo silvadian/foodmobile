@@ -33,7 +33,10 @@ const Bar = ({
         };
 
         return (
-          <TouchableOpacity onPress={onPress} style={styles.itemWrapper}>
+          <TouchableOpacity
+            onPress={onPress}
+            style={styles.itemWrapper}
+            key={label}>
             <Text style={styles.label}>{label}</Text>
             <View
               style={[

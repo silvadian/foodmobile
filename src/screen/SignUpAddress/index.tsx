@@ -3,6 +3,7 @@ import React, {useCallback, useState} from 'react';
 import {Button, Container, Gap, Header, Input} from '../../components';
 import {SignUpAddressProps} from '../../utils';
 import {useSignUpAddressMutation} from '../../redux';
+import {useLoading} from '../../hook';
 
 const SignUpAddress = ({navigation, route}: SignUpAddressProps) => {
   const [mutation] = useSignUpAddressMutation();
@@ -11,7 +12,10 @@ const SignUpAddress = ({navigation, route}: SignUpAddressProps) => {
   const [houseNumber, setHouseNumber] = useState('');
   const [city, setCity] = useState('');
 
+  const {setIsLoading} = useLoading({});
+
   const handleSubmit = useCallback(() => {
+    setIsLoading(true);
     const params = {
       user_id: route.params.id,
       phone,
@@ -22,10 +26,13 @@ const SignUpAddress = ({navigation, route}: SignUpAddressProps) => {
     mutation(params)
       .unwrap()
       .then(res => {
+        setIsLoading(false);
         console.log('res', res);
         navigation.navigate('SignIn');
       })
-      .catch(err => console.log('err', err));
+      .catch(err => {
+        setIsLoading(false);
+      });
   }, [route, phone, address, houseNumber, city, mutation]);
 
   return (

@@ -4,9 +4,11 @@ import {useGetFoodsQuery} from '../../redux';
 import {generateParams} from '../../utils';
 import {FoodCard} from '../../components';
 import {config} from '../../redux/api/config';
+import {useNavigation} from '@react-navigation/native';
 
 const Recommended = () => {
   const {data} = useGetFoodsQuery(generateParams('key', 'recommended'));
+  const navigation = useNavigation<any>();
   return (
     <View style={{backgroundColor: '#3F3F3F'}}>
       <ScrollView>
@@ -21,9 +23,8 @@ const Recommended = () => {
                   uri: `${config.serviceMediaUrl}/images/${item.picture}`,
                 }}
                 price={item.price}
-                onPress={
-                  () => {}
-                  // navigation.navigate('FoodDetails', {id: item.id})
+                onPress={() =>
+                  navigation.navigate('FoodDetails', {id: item.id})
                 }
               />
             ))

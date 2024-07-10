@@ -7,9 +7,11 @@ import {useSelector} from 'react-redux';
 import {RootState, useCreateOrderMutation} from '../../redux';
 import {PaymentAddressProps, moneyFormat} from '../../utils';
 import {config} from '../../redux/api/config';
+import {useLoading} from '../../hook';
 
-const PaymentAddress = ({route}: PaymentAddressProps) => {
+const PaymentAddress = ({route, navigation}: PaymentAddressProps) => {
   const [mutate] = useCreateOrderMutation();
+  const {setIsLoading} = useLoading({});
   const {
     id: userId,
     full_name,
@@ -19,6 +21,7 @@ const PaymentAddress = ({route}: PaymentAddressProps) => {
   const {title, price, picture, id: foodId} = food;
 
   const handleCheckOutNow = useCallback(() => {
+    setIsLoading(true);
     mutate({
       user_id: userId,
       food_id: foodId,
@@ -27,8 +30,13 @@ const PaymentAddress = ({route}: PaymentAddressProps) => {
       transaction_code: 'test',
     })
       .unwrap()
-      .then(res => console.log('res', res))
-      .catch(err => console.log('err', err));
+      .then(res => {
+        setIsLoading(false);
+        navigation.navigate("MainApp")
+      })
+      .catch(err => {
+        setIsLoading(false);
+      });
   }, [amount, userId]);
 
   return (

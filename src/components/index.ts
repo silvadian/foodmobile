@@ -8,6 +8,7 @@ import FoodCard from './FoodCard';
 import HomeHeader from './HomeHeader';
 import Bar from './Bar';
 import ShowPicker from './ShowPicker';
+import Loading from './Loading';
 
 export {
   Input,
@@ -20,4 +21,5 @@ export {
   HomeHeader,
   Bar,
   ShowPicker,
+  Loading,
 };

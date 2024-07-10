@@ -19,9 +19,11 @@ import {
 } from '../../components';
 import {SignUpProps} from '../../utils';
 import {useRegisterMutation} from '../../redux';
+import { useLoading } from '../../hook';
 
 const SignUp = ({navigation}: SignUpProps) => {
   const [mutation] = useRegisterMutation();
+  const {setIsLoading} = useLoading({});
 
   const [showPicker, setShowPicker] = useState(false);
   const [uri, setUri] = useState<string>();
@@ -32,13 +34,16 @@ const SignUp = ({navigation}: SignUpProps) => {
   const [password, setPassword] = useState('');
 
   const GotoAddress = useCallback(() => {
+    setIsLoading(true);
     mutation({full_name: fullName, image: base64, email, password})
       .unwrap()
       .then(res => {
+        setIsLoading(false);
         const {id} = res.data;
         navigation.navigate('SignUpAddress', {id});
       })
       .catch((err: any) => {
+        false
         console.log('ini lagi error', err);
       });
   }, [fullName, email, password, base64]);

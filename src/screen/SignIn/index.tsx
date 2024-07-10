@@ -3,10 +3,13 @@ import {StyleSheet, View} from 'react-native';
 import {Button, Container, Gap, Header, Input} from '../../components';
 import {useLazyGetUserQuery, useLoginMutation} from '../../redux';
 import {SignInProps} from '../../utils';
+import {useLoading} from '../../hook';
 
 const SignIn = ({navigation}: SignInProps) => {
   const [mutation] = useLoginMutation();
   const [triger] = useLazyGetUserQuery(undefined);
+
+  const {setIsLoading} = useLoading({});
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,20 +17,26 @@ const SignIn = ({navigation}: SignInProps) => {
   const createNewAccount = useCallback(() => {
     navigation.navigate('SignUp');
   }, []);
+
   const onSigInPress = useCallback(() => {
+    setIsLoading(true);
     mutation({email, password})
       .unwrap()
-      .then(res => {
+      .then(() => {
         triger(undefined)
           .unwrap()
           .then(res => {
-            console.log('res', res)
+            setIsLoading(false);
             if (res.data.rules === 'user') navigation.navigate('MainApp');
             else navigation.navigate('AdminDashboard');
           })
-          .catch(err => console.log('err', err));
+          .catch(() => {
+            setIsLoading(false);
+          });
       })
-      .catch(err => console.log('err', err));
+      .catch(() => {
+        setIsLoading(false);
+      });
   }, [email, password]);
 
   return (

@@ -33,6 +33,7 @@ const HomeScreen = () => {
                   onPress={() =>
                     navigation.navigate('FoodDetails', {id: item.id})
                   }
+                  containerStyle={{minWidth : 200}}
                 />
               ))
             : null}

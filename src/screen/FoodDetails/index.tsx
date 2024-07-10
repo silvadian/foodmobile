@@ -12,13 +12,16 @@ import {Button, Gap} from '../../components';
 import {useGetFoodQuery} from '../../redux';
 import {config} from '../../redux/api/config';
 import {FoodDetailsProps, moneyFormat} from '../../utils';
+import {useLoading} from '../../hook';
 
 const {width} = Dimensions.get('screen');
 
 const FoodDetails = ({navigation, route}: FoodDetailsProps) => {
   const [amount, setAmount] = useState(1);
   const {id} = route.params;
-  const {data} = useGetFoodQuery(id);
+  const {data, isLoading} = useGetFoodQuery(id);
+
+  useLoading({isLoading});
 
   const totalPrice = useMemo(() => {
     const price = data?.data.price || 0;

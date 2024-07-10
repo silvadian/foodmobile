@@ -19,7 +19,6 @@ const AdminFoodDetails = ({navigation, route}: AdminFoodDetailsProps) => {
   const {id} = route.params;
   const [mutate] = useDeleteFoodMutation();
   const {data} = useGetFoodQuery(id);
-
   const star = useMemo(() => data?.data?.star || 0, [data]);
 
   const onDeletePress = useCallback(() => {

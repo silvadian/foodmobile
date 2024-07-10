@@ -6,6 +6,7 @@ import ICHome from './ic-home.svg';
 import ICOrder from './ic-order.svg';
 import ICProfile from './ic-profile.svg';
 import ICStar from './ic-star.svg';
+import ICChevronRight from './id-chevron-right.svg'
 
 export {
   ICArrowLeft,
@@ -16,4 +17,5 @@ export {
   ICOrder,
   ICProfile,
   ICStar,
+  ICChevronRight
 };
