@@ -1,8 +1,8 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {useGetOrderQuery} from '../../redux';
-import {generateParams} from '../../utils';
-import {FoodCard} from '../../components';
+import { ScrollView, StyleSheet } from 'react-native';
+import { FoodCard } from '../../components';
+import { useGetOrderQuery } from '../../redux';
+import { generateParams } from '../../utils';
 
 const InProgress = () => {
   const {data} = useGetOrderQuery(generateParams('status', 'Pending'));

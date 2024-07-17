@@ -16,6 +16,8 @@ import {
   SignUpAddress,
   SplashScreen,
   TransactionScreen,
+  UpdateAddress,
+  UpdatePassword,
 } from '../screen';
 import {RootStackParams} from '../utils';
 import Menu from './Menu';
@@ -81,7 +83,7 @@ const Routers = () => {
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="MainApp" component={MainApp} />
         <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
-        <Stack.Screen name="AddProductScreen" component={AddProductScreen}/>
+        <Stack.Screen name="AddProductScreen" component={AddProductScreen} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
@@ -89,7 +91,8 @@ const Routers = () => {
         <Stack.Screen name="FoodDetails" component={FoodDetails} />
         <Stack.Screen name="PaymentAddress" component={PaymentAddress} />
         <Stack.Screen name="AdminFoodDetails" component={AdminFoodDetails} />
-        
+        <Stack.Screen name="UpdateAddress" component={UpdateAddress} />
+        <Stack.Screen name="UpdatePassword" component={UpdatePassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );

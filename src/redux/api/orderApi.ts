@@ -20,7 +20,7 @@ export const ordersApi = createApi({
       }),
       invalidatesTags: ['ORDER'],
     }),
-    getOrder : builder.query<any, any>({
+    getOrder : builder.query<any, string | undefined>({
       query: params => `/order${params ? params: ""}`,
       providesTags: [{type: 'ORDER', id: 'LIST'}],
     })

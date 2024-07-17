@@ -11,6 +11,8 @@ import TransactionScreen from './TransactionScreen';
 import ProductScreen from './ProductScreen';
 import AddProductScreen from './AddProductScreen';
 import AdminFoodDetails from './AdminFoodDetails';
+import UpdateAddress from './UpdateAddress';
+import UpdatePassword from './UpdatePassword';
 
 export {
   HomeScreen,
@@ -26,4 +28,6 @@ export {
   ProductScreen,
   AddProductScreen,
   AdminFoodDetails,
+  UpdateAddress,
+  UpdatePassword,
 };

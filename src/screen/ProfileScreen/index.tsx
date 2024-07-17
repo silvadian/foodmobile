@@ -1,12 +1,12 @@
-import { CommonActions, useNavigation } from '@react-navigation/native';
-import React, { useCallback } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ICChevronRight } from '../../assets';
-import { Container, Gap, InputAvatar } from '../../components';
-import { clearUserData, clearUserToken, useAppDispatch } from '../../redux';
+import {CommonActions, useNavigation} from '@react-navigation/native';
+import React, {useCallback} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ICChevronRight} from '../../assets';
+import {Container, Gap, InputAvatar} from '../../components';
+import {clearUserData, clearUserToken, useAppDispatch} from '../../redux';
 
 const ProfileScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const dispatch = useAppDispatch();
 
   const handleLogout = useCallback(() => {
@@ -18,6 +18,14 @@ const ProfileScreen = () => {
         routes: [{name: 'SignIn'}],
       }),
     );
+  }, []);
+
+  const updateAddressPress = useCallback(() => {
+    navigation.navigate('UpdateAddress');
+  }, []);
+
+  const updatePasswordPress = useCallback(() => {
+    navigation.navigate('UpdatePassword');
   }, []);
 
   return (
@@ -36,11 +44,11 @@ const ProfileScreen = () => {
         <Text style={styles.menuTitle}>Edit Profile</Text>
         <ICChevronRight />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.menu}>
+      <TouchableOpacity style={styles.menu} onPress={updateAddressPress}>
         <Text style={styles.menuTitle}>Home Address</Text>
         <ICChevronRight />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.menu}>
+      <TouchableOpacity style={styles.menu} onPress={updatePasswordPress}>
         <Text style={styles.menuTitle}>Security</Text>
         <ICChevronRight />
       </TouchableOpacity>
