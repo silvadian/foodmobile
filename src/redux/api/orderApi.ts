@@ -1,5 +1,9 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {CreateOrderRequest} from '../../utils';
+import {
+  CreateOrderRequest,
+  getOrderResponse,
+  UpdateOrderRequest,
+} from '../../utils';
 import {config} from './config';
 import {prepareHeaders} from './prepareHeaders';
 
@@ -20,11 +24,31 @@ export const ordersApi = createApi({
       }),
       invalidatesTags: ['ORDER'],
     }),
-    getOrder : builder.query<any, string | undefined>({
-      query: params => `/order${params ? params: ""}`,
+    getOrder: builder.query<
+      getOrderResponse,
+      {status: 'Completed' | 'Canceled' | 'Pending'}
+    >({
+      query: ({status}) => {
+        return {
+          url: `/order`,
+          params: {status},
+        };
+      },
       providesTags: [{type: 'ORDER', id: 'LIST'}],
-    })
+    }),
+    updateOrder: builder.mutation<any, UpdateOrderRequest>({
+      query: ({id, status}) => ({
+        url: `/order/${id}`,
+        method: 'PUT',
+        body: {status},
+      }),
+      invalidatesTags: ['ORDER'],
+    }),
   }),
 });
 
-export const {useCreateOrderMutation, useGetOrderQuery} = ordersApi;
+export const {
+  useCreateOrderMutation,
+  useGetOrderQuery,
+  useUpdateOrderMutation,
+} = ordersApi;

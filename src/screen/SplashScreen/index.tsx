@@ -4,16 +4,24 @@ import {ILLogo} from '../../assets';
 import {CommonActions} from '@react-navigation/native';
 import {SplashScreenProps} from '../../utils';
 import {useAppSelector} from '../../redux';
+import {shallowEqual} from 'react-redux';
 
 const SplashScreen = ({navigation}: SplashScreenProps) => {
-  const {isLogin} = useAppSelector(state => state.userToken.userToken);
+  const {isLogin} = useAppSelector(
+    state => state.userToken.userToken,
+    shallowEqual,
+  );
+  const {rules} = useAppSelector(
+    state => state.userData.userData,
+    shallowEqual,
+  );
 
   const name = useMemo(() => {
-    if (isLogin) return 'MainApp';
+    if (isLogin && rules === 'user') return 'MainApp';
+    if (isLogin && rules === 'admin') return 'AdminDashboard';
     return 'SignIn';
-  }, [isLogin]);
+  }, [isLogin, rules]);
 
-  console.log('name', name, isLogin);
   useEffect(() => {
     setTimeout(() => {
       navigation.dispatch(

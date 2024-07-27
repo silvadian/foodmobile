@@ -26,7 +26,7 @@ interface FoodCardLandscapeProps {
   title: string;
   star: number;
   variant: 'landscape';
-  price: number;
+  price: number | string;
   type?: 'PastOrder' | 'InProgress';
   isCancel?: boolean;
   onPress?: () => void;

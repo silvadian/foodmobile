@@ -1,31 +1,33 @@
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {FoodCard, Header} from '../../components';
-import {useGetOrderQuery} from '../../redux';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import PastOrder from './PastOrder';
+import InProgress from './InProgress';
+import {Bar, Gap, Header} from '../../components';
 
-const TransactionScreen = () => {
-  const {data} = useGetOrderQuery(undefined);
-  console.log('data useGetOrderQuery', data);
+const Tab = createMaterialTopTabNavigator();
+
+const OrderScreen = () => {
   return (
-    <View style={{backgroundColor: '#3F3F3F', flex: 1}}>
-      <Header title="incoming Orders" desc="" />
-      <ScrollView style={{backgroundColor: '#3F3F3F'}}>
-        {data?.data?.map(item => (
-          <FoodCard
-            key={item.title}
-            variant="landscape"
-            star={1}
-            title={item.title}
-            image={item.image}
-            price={item.price}
-            type="PastOrder"
-          />
-        ))}
-      </ScrollView>
+    <View style={{backgroundColor: '#3F3F3F', flex : 1}}>
+      <Header title="Your Orders" desc="Wait for the best meal" />
+      <Gap height={24} backgroundColor="#4F4F4F" />
+      <Tab.Navigator tabBar={props => <Bar {...props} />}>
+        <Tab.Screen
+          name="InProgress"
+          component={InProgress}
+          options={{title: 'In Progress'}}
+        />
+        <Tab.Screen
+          name="PastOrder"
+          component={PastOrder}
+          options={{title: 'Past Order'}}
+        />
+      </Tab.Navigator>
     </View>
   );
 };
 
-export default TransactionScreen;
+export default OrderScreen;
 
 const styles = StyleSheet.create({});

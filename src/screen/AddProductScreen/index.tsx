@@ -24,7 +24,7 @@ const AddProductScreen = ({navigation}: AddProductScreenProps) => {
   const [star, setStar] = useState('');
   const [recommended, setRecommended] = useState('');
   const [popular, setPopular] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState<string | undefined>(undefined);
   const [uri, setUri] = useState<string | undefined>(undefined);
 
   const handleSave = useCallback(() => {

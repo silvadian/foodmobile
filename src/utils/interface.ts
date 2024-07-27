@@ -89,3 +89,23 @@ export interface CreateOrderRequest {
   status: 'Pending';
   transaction_code: 'test';
 }
+
+export interface getOrderResponse extends SuccessResponse {
+  data: {
+    id: number;
+    food_id: number;
+    user_id: number;
+    amount: number;
+    status: string;
+    transaction_code: string;
+    created_at: Date;
+    updated_at: Date;
+    food: Food;
+    user: UserData;
+  }[];
+}
+
+export interface UpdateOrderRequest {
+  id: number;
+  status: 'Completed' | 'Canceled';
+}

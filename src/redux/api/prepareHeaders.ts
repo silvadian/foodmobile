@@ -8,6 +8,7 @@ export const prepareHeaders = (
   const {userToken} = getState() as RootState;
   headers.set('Access-Control-Allow-Origin', '*');
   headers.set('Accept', 'application/json');
+  headers.set('Cache-Control', 'no-cache');
   if (userToken.userToken?.token) {
     headers.set('Authorization', userToken.userToken.token);
   }

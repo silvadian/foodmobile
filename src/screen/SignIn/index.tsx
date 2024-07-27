@@ -34,7 +34,8 @@ const SignIn = ({navigation}: SignInProps) => {
             setIsLoading(false);
           });
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log('error', error)
         setIsLoading(false);
       });
   }, [email, password]);
