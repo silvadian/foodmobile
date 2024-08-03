@@ -25,6 +25,7 @@ const PastOrder = () => {
           price={`${item.amount} items • ${moneyFormat(item.food.price)}`}
           type="PastOrder"
           isCancel={item.status === 'Canceled'}
+          pastOrderDate={new Date(item.created_at)}
         />
       ))}
     </ScrollView>

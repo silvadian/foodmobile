@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {Gap} from '.';
 import {ICStar} from '../assets';
+import {convertDate} from '../utils';
 
 interface FoodCardPotraitProps {
   image: ImageSourcePropType;
@@ -29,6 +30,7 @@ interface FoodCardLandscapeProps {
   price: number | string;
   type?: 'PastOrder' | 'InProgress';
   isCancel?: boolean;
+  pastOrderDate?: Date;
   onPress?: () => void;
 }
 
@@ -50,7 +52,9 @@ const FoodCard = (props: FoodCardLandscapeProps | FoodCardPotraitProps) => {
         </View>
         {props.type === 'PastOrder' ? (
           <View>
-            <Text style={styles.date}>Jun 12, 14:00</Text>
+            <Text style={styles.date}>
+              {props?.pastOrderDate ? convertDate(props?.pastOrderDate, 'dd mm HH:mm') : '-'}
+            </Text>
             <Gap height={2} />
             <Text style={styles.cancel}>
               {props.isCancel ? 'Cancelled' : ''}
@@ -132,6 +136,7 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 10,
     fontWeight: '400',
+    color: '#8D92A3',
   },
   cancel: {
     fontSize: 10,

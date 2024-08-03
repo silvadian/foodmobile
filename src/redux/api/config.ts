@@ -1,4 +1,4 @@
 export const config = {
-  url: 'https://3226-103-156-86-77.ngrok-free.app',
-  serviceMediaUrl: 'https://03qx828d-4002.asse.devtunnels.ms',
+  url: 'http://192.168.2.1:4000',
+  serviceMediaUrl: 'http://192.168.2.1:4002',
 };

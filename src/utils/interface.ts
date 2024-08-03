@@ -101,7 +101,6 @@ export interface getOrderResponse extends SuccessResponse {
     created_at: Date;
     updated_at: Date;
     food: Food;
-    user: UserData;
   }[];
 }
 
